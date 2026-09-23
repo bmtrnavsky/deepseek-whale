@@ -1,5 +1,7 @@
 # 🐳 DeepSeek Whale — DeepSeek Off-Peak Pricing Indicator for Hermes Agent Desktop
 
+![DeepSeek Whale](docs/social-preview.png)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Hermes Desktop plugin](https://img.shields.io/badge/Hermes-Desktop%20plugin-8A63D2.svg)](https://github.com/NousResearch/hermes-agent)
 
 A live [DeepSeek API](https://api-docs.deepseek.com/quick_start/pricing) pricing indicator for the [Hermes Agent](https://github.com/NousResearch/hermes-agent) desktop app. A whale in the titlebar tells you at a glance whether DeepSeek is in **peak hours (full price)** or **off-peak hours (half-price discount)**, so you never burn full-price tokens by accident.
