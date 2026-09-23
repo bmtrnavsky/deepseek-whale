@@ -74,7 +74,7 @@ function WhaleButton() {
       filter: st.inPeak ? 'grayscale(1) opacity(0.6)' : 'none'
     },
     children: [
-      jsx('span', { key: 'w', style: { fontSize: '15px', lineHeight: 1 }, children: 'WHALE' }),
+      jsx('span', { key: 'w', style: { fontSize: '15px', lineHeight: 1 }, children: '🐳' }),
       jsx('span', { key: 't', children: st.inPeak ? 'PEAK' : 'x0.5' })
     ]
   })
