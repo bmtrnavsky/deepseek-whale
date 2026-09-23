@@ -1,0 +1,7 @@
+name: deepseek-whale
+version: 1.1.0
+description: DeepSeek API peak/off-peak pricing whale for the Hermes Agent desktop titlebar
+author: Brad Trnavsky
+license: MIT
+homepage: https://github.com/bmtrnavsky/deepseek-whale
+tags: [desktop, deepseek, pricing, titlebar]
