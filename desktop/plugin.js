@@ -13,7 +13,7 @@ const ID = 'deepseek-whale'
 const PEAK_WINDOWS = [[1, 4], [6, 10]]
 
 function isPeak(date) {
-  var day = date.getUTCDay()
+  var day = date.getUTCDay() // 0 = Sunday, 6 = Saturday
   if (day === 0 || day === 6) return false
   var h = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600
   return PEAK_WINDOWS.some(function (w) { return h >= w[0] && h < w[1] })
@@ -24,6 +24,8 @@ function nextSwitch(now) {
   var cursor = new Date(now.getTime())
   cursor.setUTCSeconds(0, 0)
   cursor.setUTCMinutes(cursor.getUTCMinutes() + 1)
+  // Minute-by-minute sweep; the longest jump is the weekend (~3 days),
+  // so an 8-day margin covers it without any day arithmetic.
   for (var i = 0; i < 60 * 24 * 8; i++) {
     if (isPeak(cursor) !== peak) return cursor
     cursor.setUTCMinutes(cursor.getUTCMinutes() + 1)
@@ -68,20 +70,22 @@ function WhaleButton() {
       padding: '2px 6px',
       fontSize: '12px',
       color: 'var(--ui-text-secondary)',
+      // blue whale at half price, grey whale at peak
       filter: st.inPeak ? 'grayscale(1) opacity(0.6)' : 'none'
     },
     children: [
-      jsx('span', { key: 'w', style: { fontSize: '15px', lineHeight: 1 }, children: 'WHALE' }),
+      jsx('span', { key: 'w', style: { fontSize: '15px', lineHeight: 1 }, children: 'X' }),
       jsx('span', { key: 't', children: st.inPeak ? 'PEAK' : 'x0.5' })
     ]
   })
 }
 
 export default {
-  id: ID,
+  id: ID, // must match the folder name
   name: 'DeepSeek Whale',
   register(ctx) {
     let disposeWhale = null
+
     const paint = function () {
       if (disposeWhale) disposeWhale()
       disposeWhale = ctx.register({
@@ -91,9 +95,11 @@ export default {
         render: function () { return jsx(WhaleButton, {}) }
       })
     }
+
     paint()
     const timer = setInterval(paint, 30000)
     if (ctx.onDispose) ctx.onDispose(function () { clearInterval(timer) })
+
     ctx.register({
       id: 'status',
       area: PALETTE_AREA,
