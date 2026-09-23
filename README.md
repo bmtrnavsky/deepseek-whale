@@ -5,13 +5,15 @@ A live DeepSeek API pricing indicator for the [Hermes Agent](https://github.com/
 - 🔵 **Off-peak = half price** — full-color blue whale with `x0.5`
 - ⚪ **Peak = full price** — greyed-out whale with `PEAK`
 
-Click the whale (or hover) for a live countdown to the next pricing switch. Repaints every 30 seconds. No backend, no API key — pure clock math against DeepSeek's fixed UTC peak windows (01:00–04:00 and 06:00–10:00 UTC).
+Click the whale (or hover) for a live countdown to the next pricing switch. Repaints every 30 seconds. No backend, no API key — pure clock math against DeepSeek's fixed UTC peak windows (01:00–04:00 and 06:00–10:00 UTC, Monday–Friday; weekends always off-peak).
 
 Also answers to Ctrl+K → `DeepSeek Whale: peak status`.
 
 ## Why this exists
 
 DeepSeek charges full price during peak hours and ~50% off during off-peak hours. That pricing question — *"am I in peak right now?"* — deserves an answer without opening a browser tab. This plugin puts it in the Hermes desktop titlebar, next to the settings gear.
+
+Peak hours per [DeepSeek's pricing page](https://api-docs.deepseek.com/quick_start/pricing): 01:00–04:00 and 06:00–10:00 UTC, Monday through Friday. All other hours are off-peak, including full weekends.
 
 ## Install (Hermes desktop plugin)
 
