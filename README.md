@@ -21,6 +21,19 @@ Note: the plugin is pure clock math with no holiday calendar, so on a Chinese pu
 
 ## How it works
 
+```mermaid
+flowchart LR
+    CLK([system clock UTC]) --> WK{weekday?}
+    WK -- no --> BLUE([blue whale x0.5])
+    WK -- yes --> WIN{in 01-04 or 06-10 UTC?}
+    WIN -- no --> BLUE
+    WIN -- yes --> GREY([grey whale PEAK])
+    BLUE --> CD[countdown to next switch]
+    GREY --> CD
+    CD --> RE[repaint 30s]
+    RE --> CLK
+```
+
 - Reads your system clock, converts to UTC, and checks it against the two weekday peak windows.
 - Weekends always read off-peak. The countdown sweeps forward to the next rate switch, so Friday evening correctly counts down to Monday 01:00 UTC.
 - Zero network calls, zero config, zero API keys. It never touches your requests — it only makes the cheap hours visible.
