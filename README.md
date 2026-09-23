@@ -5,7 +5,7 @@ A live DeepSeek API pricing indicator for the [Hermes Agent](https://github.com/
 - 🔵 **Off-peak = half price** — full-color blue whale with `x0.5`
 - ⚪ **Peak = full price** — greyed-out whale with `PEAK`
 
-Click the whale (or hover) for a live countdown to the next pricing switch. Repaints every 30 seconds. No backend, no API key — pure clock math against DeepSeek's fixed UTC peak windows (01:00–04:00 and 06:00–10:00 UTC, Monday–Friday; weekends always off-peak).
+Click the whale (or hover) for a live countdown to the next pricing switch. Repaints every 30 seconds. No backend, no API key — pure clock math against DeepSeek's fixed UTC peak windows (01:00–04:00 and 06:00–10:00 UTC, Monday–Friday excluding Chinese public holidays; weekends and holidays always off-peak).
 
 Also answers to Ctrl+K → `DeepSeek Whale: peak status`.
 
@@ -13,11 +13,13 @@ Also answers to Ctrl+K → `DeepSeek Whale: peak status`.
 
 DeepSeek charges full price during peak hours and ~50% off during off-peak hours. That pricing question — *"am I in peak right now?"* — deserves an answer without opening a browser tab. This plugin puts it in the Hermes desktop titlebar, next to the settings gear.
 
-Peak hours per [DeepSeek's pricing page](https://api-docs.deepseek.com/quick_start/pricing): 01:00–04:00 and 06:00–10:00 UTC, Monday through Friday. All other hours are off-peak, including full weekends.
+Peak hours per [DeepSeek's pricing page](https://api-docs.deepseek.com/quick_start/pricing): 01:00–04:00 and 06:00–10:00 UTC, Monday through Friday, excluding Chinese public holidays. All other hours are off-peak, including full weekends and Chinese public holidays in full.
+
+Note: the plugin is pure clock math with no holiday calendar, so on a Chinese public holiday that falls on a weekday it will still show peak — when in doubt, check the pricing page.
 
 ## Install (Hermes desktop plugin)
 
-Copy `plugin.js` into your Hermes home:
+Copy `desktop/plugin.js` into your Hermes home:
 
 ```
 $HERMES_HOME/desktop-plugins/deepseek-whale/plugin.js
@@ -29,7 +31,7 @@ Requires the Hermes desktop app (`hermes desktop`). Built on the [@hermes/plugin
 
 ## Retune the windows
 
-If DeepSeek changes its peak schedule, edit `PEAK_WINDOWS` at the top of `plugin.js`:
+If DeepSeek changes its peak schedule, edit `PEAK_WINDOWS` at the top of `desktop/plugin.js`:
 
 ```js
 // [startHour, endHour) in UTC
